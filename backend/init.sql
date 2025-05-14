@@ -1,0 +1,12 @@
+CREATE DATABASE IF NOT EXISTS camagru;
+
+USE camagru;
+
+CREATE TABLE IF NOT EXISTS user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    confirmed BOOLEAN DEFAULT 0,
+    confirm_token VARCHAR(255) DEFAULT NULL
+);
