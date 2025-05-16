@@ -4,4 +4,9 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: login.html');
     exit();
 }
+$username = $_SESSION['username'];
+$email = $_SESSION['email'];
+<pre>
+<?php print_r($_SESSION); ?>
+</pre>
 ?>

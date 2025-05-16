@@ -11,6 +11,7 @@ form {
     max-width: 400px;
     color: #E0E1DD;
     box-sizing: border-box;
+    margin-top: 3rem;
 }
 .login-card h2 {
     text-align: center;

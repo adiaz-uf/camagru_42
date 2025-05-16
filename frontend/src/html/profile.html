@@ -8,6 +8,21 @@
     <link rel="stylesheet" href="../css/profile.css">
 </head>
 <body>
+    <body>
+    <div id="page-blocker" style="
+    position: fixed;
+    top: 0; left: 0; 
+    width: 100%; height: 100%;
+    background: #0D1B2A;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+    ">
+        Loading...
+    </div>
     <header>
         <nav class="navbar">
             <div class="logo">Camagru</div>
@@ -37,7 +52,7 @@
                 <form id="change-username">
                     <div class="profile-data">
                         <label for="username">Username:</label>
-                        <label>get_username </label> 
+                         <label id="username-display">get_username</label> 
                     </div>
                     <input type="text" id="username" name="username" placeholder="New username" required>
                     <button>
@@ -47,7 +62,7 @@
                 <form id="change-email">
                     <div class="profile-data">
                         <label for="email">email:</label>
-                        <label>get_email </label> 
+                        <label id="email-display">get_email</label> 
                     </div>
                     <input type="text" id="email" name="email" placeholder="New email" required>
                     <button>
@@ -60,8 +75,11 @@
                     <label for="password">Change password:</label>
                 </div>
                 <div class="password-input">
-                    <input type="text" id="old-password" name="old-password" placeholder="Old password" required>
-                    <input type="text" id="new-password" name="new-password" placeholder="New password" required>
+                <input type="password" id="old-password" name="old-password" placeholder="Old password" required>
+                    <input type="password" id="new-password" name="new-password" placeholder="New password"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                    title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters" 
+                    required autocomplete="new-password">
                 </div>
                 <button>
                     Change password
@@ -71,7 +89,7 @@
     </main>
     <footer>
         &copy; 2025 Camagru
-        <button class="logout-btn" onclick="location.href='logout.html'" aria-label="Logout">
+        <button class="logout-btn" onclick="location.href='../../backend/app/logout.php'" aria-label="Logout">
             Logout
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M16 17v-3H7v-4h9V7l5 5-5 5z"/>
@@ -79,6 +97,11 @@
             </svg>
         </button>
     </footer>
+    <script type="module">
+        import { protectRoute } from '../js/auth.js';
+        protectRoute();
+    </script>
     <script src="../js/main.js"></script>
+    <script src="../js/profile.js"></script>
 </body>
 </html>

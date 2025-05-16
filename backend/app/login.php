@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     try {
-        $stmt = $pdo->prepare("SELECT id, username, password, confirmed FROM user WHERE username = :username");
+        $stmt = $pdo->prepare("SELECT id, username, email, password, confirmed FROM user WHERE username = :username");
         $stmt->bindParam(':username', $username);
         $stmt->execute();
 
@@ -37,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             session_start();
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['email'] = $user['email'];
 
             echo json_encode(['success' => true, 'message' => 'Login successful.']);
             exit();
