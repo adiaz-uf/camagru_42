@@ -1,0 +1,89 @@
+.profile-data {
+    padding-top: 1.5rem;
+    padding-bottom: 0.3rem;
+    display: flex;
+    gap: 0.3rem;
+    width: 100%;
+}
+.profile-card {
+    background-color: #1B263B;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    color: #E0E1DD;
+    box-sizing: border-box;
+    height: auto;
+    width: 100%;
+    max-width: 700px;
+    margin-top: 1rem;
+}
+.profile-container {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+.profile-card h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.profile-card h3 {
+    text-align: center;
+    padding: 0 2rem;
+}
+.profile-card form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.password-form{
+    display: flex;
+}
+.password-input {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+}
+.password-form input {
+    width: 100%;
+    box-sizing: border-box;
+}
+.profile-card label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+.profile-card input {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #E0E1DD;
+    color: #0D1B2A;
+    font-size: 1rem;
+}
+.profile-card button {
+    background-color: #415A77;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    font-size: 1rem;
+}
+.profile-card button:hover {
+    background-color: #FF6B6B;
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        flex-wrap: wrap;
+    }
+    .password-input{
+        flex-wrap: wrap;
+        gap: 0;
+    }
+    .profile-data {
+        flex-wrap: wrap;
+    }
+}

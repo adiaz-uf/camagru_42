@@ -27,12 +27,12 @@ services:
   frontend:
     build: 
       context: ./frontend
-#      dockerfile: Dockerfile-dev  # Aquí indicamos el Dockerfile de desarrollo
-#    volumes:
-#      - ./frontend/src:/app/src  # Montamos el directorio src local para que los cambios se reflejen en tiempo real
-#      - ./frontend/public:/app/public
-#    environment:
-#      - NODE_ENV=development  # Establecemos el entorno de desarrollo
+      dockerfile: Dockerfile-dev  # Aquí indicamos el Dockerfile de desarrollo
+    volumes:
+      - ./frontend/src:/app/src  # Montamos el directorio src local para que los cambios se reflejen en tiempo real
+      - ./frontend/public:/app/public
+    environment:
+      - NODE_ENV=development  # Establecemos el entorno de desarrollo
     expose:
       - "80"
 

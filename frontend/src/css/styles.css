@@ -6,7 +6,8 @@ html, body {
     color: #E0E1DD;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: auto;
+    min-height: 100vh;
 }
 h1 {
     margin-top: 3em;
@@ -25,15 +26,20 @@ h2 {
 .navbar {
     background:  #1B263B;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
+    position: relative;
 }
-header .logo {
+.logo {
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     font-size: 1.5rem;
     color: #FFFFFF;
+}
+.nav-links {
+    display: flex;
+    align-items: center;
 }
 nav a {
     margin-left: 1.5rem;
@@ -41,12 +47,24 @@ nav a {
     color: #E0E1DD;
     font-weight: 600;
 }
+nav a:hover {
+    color: #FF6B6B;
+}
+.menu-toggle {
+    display: none;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    cursor: pointer;
+}
 main {
-    flex: 1;
+    /* flex: 1; */
     display: flex;
     justify-content: center;
-    align-items: center;
     padding: 1rem;
+    height: auto;
+    min-height: auto;
 }
 .btn {
     background-color: #415A77;
@@ -75,9 +93,50 @@ footer {
     color: #E0E1DD;
     margin-top: auto;
     flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+}
+.logout-btn {
+    background: none;
+    border: none;
+    color: #FF6B6B;
+    cursor: pointer;
+    margin-left: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+.logout-btn svg {
+    width: 24px;
+    height: 24px;
+}
+.logout-btn:hover {
+    color: #E0E1DD;
 }
 @media (max-width: 768px) {
-    nav a {
-        margin-left: 1rem;
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #1B263B;
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        padding-bottom: 1rem;
     }
+    .nav-links a {
+        margin-bottom: 1.5rem;
+    }
+    .menu-toggle {
+        display: block;
+    }
+    .nav-links.active {
+        display: flex;
+    }
+}
+
+.mt-2 {
+    margin-top: 2rem;
 }

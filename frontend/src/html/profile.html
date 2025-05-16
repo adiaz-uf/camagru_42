@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Camagru</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/profile.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Camagru</div>
+             <button class="menu-toggle" aria-label="Toggle menu">
+                &#9776;
+            </button>
+            <div class="nav-links">
+                <a href="#galery">Galery</a>
+                <a href="#editpage">Edit Photo</a>
+                <a href="#profile">Profile</a>
+                <button class="logout-btn" onclick="location.href='logout.html'" aria-label="Logout">
+                    Logout
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M16 17v-3H7v-4h9V7l5 5-5 5z"/>
+                        <path d="M4 4h9v2H4v12h9v2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="profile-card">
+            <h2>Profile Data</h2>
+            <h3>Here is your data, you can change any data by writing the new one and 
+                clicking on the corresponding button. </h3>
+            <div class="profile-container">
+                <form id="change-username">
+                    <div class="profile-data">
+                        <label for="username">Username:</label>
+                        <label>get_username </label> 
+                    </div>
+                    <input type="text" id="username" name="username" placeholder="New username" required>
+                    <button>
+                        Change username
+                    </button>
+                </form>
+                <form id="change-email">
+                    <div class="profile-data">
+                        <label for="email">email:</label>
+                        <label>get_email </label> 
+                    </div>
+                    <input type="text" id="email" name="email" placeholder="New email" required>
+                    <button>
+                        Change email
+                    </button>
+                </form>
+            </div>
+            <form id="change-password" class="password-form">
+                <div class="profile-data">
+                    <label for="password">Change password:</label>
+                </div>
+                <div class="password-input">
+                    <input type="text" id="old-password" name="old-password" placeholder="Old password" required>
+                    <input type="text" id="new-password" name="new-password" placeholder="New password" required>
+                </div>
+                <button>
+                    Change password
+                </button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        &copy; 2025 Camagru
+        <button class="logout-btn" onclick="location.href='logout.html'" aria-label="Logout">
+            Logout
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M16 17v-3H7v-4h9V7l5 5-5 5z"/>
+                <path d="M4 4h9v2H4v12h9v2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
+            </svg>
+        </button>
+    </footer>
+    <script src="../js/main.js"></script>
+</body>
+</html>
