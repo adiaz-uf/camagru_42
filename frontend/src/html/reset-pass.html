@@ -11,16 +11,18 @@
     <main>
         <div class="reset-card">
             <h2>Reset Password</h2>
-            <form action="#" method="post">
+            <form id="reset-form">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="email">
                 
                 <button class="btn" type="submit">Send Reset Link</button>
             </form>
+            <p id="message" style="margin-top: 1rem;"></p>
         </div>
     </main>
     <footer>
         &copy; 2025 Camagru
     </footer>
+    <script src="../js/reset-pass.js"></script>
 </body>
 </html>

@@ -5,6 +5,8 @@ services:
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./frontend/src:/usr/share/nginx/html
+      - ./backend/uploads:/var/www/html/uploads
+      #- ./frontend/public:/usr/share/nginx/html/images
       - ./certs:/etc/ssl/certs
     ports:
       - "80:80"
@@ -17,6 +19,8 @@ services:
     build: ./backend
     volumes:
       - ./backend:/var/www/html
+      - ./backend/uploads:/var/www/html/uploads
+      - ./frontend/public:/stickers
     expose:
       - "9000"
     env_file:
@@ -48,12 +52,6 @@ services:
       - camagru_db_data:/var/lib/mysql
       - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
     command: --skip-ssl  # Desactivar SSL
-    
-  mailhog:
-    image: mailhog/mailhog
-    ports:
-      - "1025:1025"  # SMTP
-      - "8025:8025"  # Web UI
 
 volumes:
   camagru_db_data:

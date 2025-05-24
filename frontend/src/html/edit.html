@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Camagru</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/edit.css">
+</head>
+<body>
+    <div id="page-blocker" style="
+    position: fixed;
+    top: 0; left: 0; 
+    width: 100%; height: 100%;
+    background: #0D1B2A;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+    ">
+        Loading...
+    </div>
+    <header>
+       <div class="navbar-container"></div>
+    </header>
+    <main>
+        <div class="edit-container">
+            <div class="img-container">
+                <div class="main-img">
+                    <div class="select-img">
+                        <button class="btn" type="submit" style="width: fit-content;">Open WebCam</button>
+                        or upload an image to edit
+                        <div class="form-container">
+                            <form id="uploadForm" enctype="multipart/form-data">
+                                <label for="imageInput" class="upload-label">Select from device</label>
+                                <input class="upload-input" type="file"disabled name="image" id="imageInput" accept="image/*" required>
+                                <!-- <input class="caption-input" type="text" name="caption" id="captionInput" placeholder="Write a caption..."> -->
+                                <button class="upload-btn" type="submit">Post Image</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="uploaded-image" id="imageEditorArea">
+                        <img id="mainImage" src="" alt="Selected image" style="max-width: 100%; display: none;">
+                        <img id="overlayImage" src="" alt="Overlay image" style="display: none;">
+                        <div id="responseMessage"></div>
+                    </div>
+                </div>
+                <div class="side-container">
+                    <label class="panel-title">Select Sticker</label>
+                    <img src="/images/monkey.png" alt="Imagen 1" />
+                    <img src="/images/monkey2.png" alt="Monkey" />
+                    <img src="/images/spider-man.jpg" alt="Imagen 3" />
+                </div>
+            </div>
+            <div class="side-panel">
+                <label class="panel-title">Previous pictures taken</label>
+                <div class="thumbnail-container"></div>
+            </div>
+        </div>
+    </div>
+    </main>
+    <div id="postPopup">
+    <div class="popup-content">
+        <img id="popupImage" src="" alt="Preview">
+        <input type="text" id="popupCaption" placeholder="Write a caption...">
+        <button id="submitPopupBtn">Post Image</button>
+        <br><br>
+        <button class="cancel-btn" onclick="document.getElementById('postPopup').style.display='none'">Cancel</button>
+    </div>
+    </div>
+    <footer>
+        &copy; 2025 Camagru
+        <button class="logout-btn" onclick="location.href='../../backend/app/logout.php'" aria-label="Logout">
+            Logout
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M16 17v-3H7v-4h9V7l5 5-5 5z"/>
+                <path d="M4 4h9v2H4v12h9v2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
+            </svg>
+        </button>
+    </footer>
+    <script type="module">
+        import { protectRoute } from '../js/auth.js';
+        protectRoute();
+    </script>
+    <script src="../js/edit.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/navbar.js"></script>
+    <script src="../js/upload.js"></script>
+    <script src="../js/post-image.js"></script>
+</body>
+</html>

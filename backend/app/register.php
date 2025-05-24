@@ -32,10 +32,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Validar la fortaleza de la contraseña
-    if (!preg_match('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/', $password)) {
+    /* if (!preg_match('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/', $password)) {
         echo json_encode(['success' => false, 'message' => 'Password does not meet security requirements.']);
         exit();
-    }
+    } */
 
     try {
         // Comprobar si el email ya está registrado
@@ -63,8 +63,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->execute();
 
         // URL de confirmación
-        $confirmUrl = "https://192.168.1.147/backend/app/confirm.php?token=$token";
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+        $host = $_SERVER['HTTP_HOST']; // IP o dominio dinámico
 
+        $confirmUrl = "{$protocol}{$host}/backend/app/confirm.php?token={$token}";
         // Enviar el correo de confirmación
         if (sendConfirmationEmail($email, $confirmUrl, $username)) {
             echo json_encode(['success' => true, 'message' => 'User registered. Check your email to confirm your account.']);

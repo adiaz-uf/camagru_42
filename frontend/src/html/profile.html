@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../css/profile.css">
 </head>
 <body>
-    <body>
     <div id="page-blocker" style="
     position: fixed;
     top: 0; left: 0; 
@@ -24,24 +23,7 @@
         Loading...
     </div>
     <header>
-        <nav class="navbar">
-            <div class="logo">Camagru</div>
-             <button class="menu-toggle" aria-label="Toggle menu">
-                &#9776;
-            </button>
-            <div class="nav-links">
-                <a href="#galery">Galery</a>
-                <a href="#editpage">Edit Photo</a>
-                <a href="#profile">Profile</a>
-                <button class="logout-btn" onclick="location.href='logout.html'" aria-label="Logout">
-                    Logout
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M16 17v-3H7v-4h9V7l5 5-5 5z"/>
-                        <path d="M4 4h9v2H4v12h9v2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
-                    </svg>
-                </button>
-            </div>
-        </nav>
+        <div class="navbar-container"></div>
     </header>
     <main>
         <div class="profile-card">
@@ -54,7 +36,7 @@
                         <label for="username">Username:</label>
                          <label id="username-display">get_username</label> 
                     </div>
-                    <input type="text" id="username" name="username" placeholder="New username" required>
+                    <input type="text" id="username" name="username" placeholder="New username" required autocomplete="username">
                     <button>
                         Change username
                     </button>
@@ -64,7 +46,7 @@
                         <label for="email">email:</label>
                         <label id="email-display">get_email</label> 
                     </div>
-                    <input type="text" id="email" name="email" placeholder="New email" required>
+                    <input type="text" id="email" name="email" placeholder="New email" required autocomplete="email">
                     <button>
                         Change email
                     </button>
@@ -79,7 +61,7 @@
                     <input type="password" id="new-password" name="new-password" placeholder="New password"
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
                     title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters" 
-                    required autocomplete="new-password">
+                    required>
                 </div>
                 <button>
                     Change password
@@ -103,5 +85,6 @@
     </script>
     <script src="../js/main.js"></script>
     <script src="../js/profile.js"></script>
+    <script src="../js/navbar.js"></script>
 </body>
 </html>
