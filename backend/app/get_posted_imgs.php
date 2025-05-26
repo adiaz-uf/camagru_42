@@ -10,20 +10,32 @@ header('Access-Control-Allow-Methods: POST, OPTIONS, GET');
 header('Access-Control-Allow-Headers: Content-Type');
 session_start();
 
-if (!isset($_SESSION['user_id'])) {
-    http_response_code(401);
-    echo json_encode(['success' => false, 'message' => 'Unauthorized']);
-    exit();
-}
-
-$userId = $_SESSION['user_id'];
-
 try {
-    $stmt = $pdo->prepare("SELECT image.id, image.image_url, image.caption, image.created_at, user.username 
-                           FROM image 
-                           JOIN user ON image.user_id = user.id 
-                           WHERE image.posted = 1 
-                           ORDER BY image.created_at DESC");
+$stmt = $pdo->prepare("SELECT
+        image.id,
+        image.image_url,
+        image.caption,
+        image.created_at,
+        user.username,
+        -- Count likes per image
+        COALESCE(likes_count.likes, 0) AS likes_count,
+        -- Count comments per image
+        COALESCE(comments_count.comments, 0) AS comments_count
+        FROM image
+        JOIN user ON image.user_id = user.id
+        LEFT JOIN (
+            SELECT image_id, COUNT(*) AS likes
+            FROM `like`
+            GROUP BY image_id
+        ) AS likes_count ON likes_count.image_id = image.id
+        LEFT JOIN (
+            SELECT image_id, COUNT(*) AS comments
+            FROM comment
+            GROUP BY image_id
+        ) AS comments_count ON comments_count.image_id = image.id
+        WHERE image.posted = 1
+        ORDER BY image.created_at DESC
+    ");
     $stmt->execute();
 
     $images = $stmt->fetchAll(PDO::FETCH_ASSOC);

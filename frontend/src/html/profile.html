@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/galery.css">
 </head>
 <body>
     <div id="page-blocker" style="
@@ -25,7 +26,7 @@
     <header>
         <div class="navbar-container"></div>
     </header>
-    <main>
+    <main class="main-container">
         <div class="profile-card">
             <h2>Profile Data</h2>
             <h3>Here is your data, you can change any data by writing the new one and 
@@ -34,7 +35,7 @@
                 <form id="change-username">
                     <div class="profile-data">
                         <label for="username">Username:</label>
-                         <label id="username-display">get_username</label> 
+                        <label id="username-display">get_username</label> 
                     </div>
                     <input type="text" id="username" name="username" placeholder="New username" required autocomplete="username">
                     <button>
@@ -54,7 +55,7 @@
             </div>
             <form id="change-password" class="password-form">
                 <div class="profile-data">
-                    <label for="password">Change password:</label>
+                    <label for="password">Change password</label>
                 </div>
                 <div class="password-input">
                 <input type="password" id="old-password" name="old-password" placeholder="Old password" required>
@@ -66,8 +67,17 @@
                 <button>
                     Change password
                 </button>
+                <div class="profile-data">
+                    <label style="margin-top: 0.5rem;">Receive email notifications</label>
+                    <div class="toggle-switch">
+                        <div class="option" data-value="1">Enabled</div>
+                        <div class="option" data-value="0">Disabled</div>
+                    </div>
+                </div>
             </form>
         </div>
+        <h2 style="margin-top: 2rem;">Posted Images</h2>
+        <div class="galery"></div>
     </main>
     <footer>
         &copy; 2025 Camagru
@@ -83,8 +93,10 @@
         import { protectRoute } from '../js/auth.js';
         protectRoute();
     </script>
+    <script>const profile=true</script>
     <script src="../js/main.js"></script>
     <script src="../js/profile.js"></script>
     <script src="../js/navbar.js"></script>
+    <script src="../js/galery.js"></script>
 </body>
 </html>

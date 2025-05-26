@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <a href="/html/galery.html">Galery</a>
             <a href="/html/edit.html">Edit Photo</a>
             <a href="/html/profile.html">Profile</a>
-            <button class="logout-btn" onclick="location.href='logout.html'" aria-label="Logout">
+            <button class="logout-btn" onclick="location.href='/backend/app/logout.php'" aria-label="Logout">
                 Logout
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M16 17v-3H7v-4h9V7l5 5-5 5z"/>

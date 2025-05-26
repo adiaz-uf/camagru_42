@@ -1,10 +1,17 @@
 .galery {
     display: grid;
-    grid-template-columns: 50% 50%;
-    overflow-y: auto;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0 auto;
+    text-align: center; 
+    justify-content: center;
     gap: 2rem;
     scrollbar-width: none;
     padding: 2rem;
+}
+
+.galery.single {
+    grid-template-columns: 1fr;
+    justify-items: center;
 }
 
 .card {
@@ -29,7 +36,7 @@
     height: auto;
     max-height: 300px;
     border-top-left-radius: 8px;
-    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
     display: block;
     object-fit: contain;
     object-position: center;
@@ -49,7 +56,8 @@
 
 .card-footer {
     display: flex;
-    justify-content: space-between;
+    justify-content:flex-end;
+    gap: 1rem;
     align-items: center;
     padding: 10px 15px;
     margin-bottom: 0.5rem;
@@ -67,6 +75,16 @@
     white-space: normal;   /* Esto permite el salto de línea */
     word-wrap: break-word; /* Rompe palabras largas si es necesario */
     overflow-wrap: break-word;
+}
+
+.delete-btn {
+    background-color: #d92020;
+    margin: 0.5rem;
+    width: fit-content;
+    margin: 0.5rem auto;
+}
+.delete-btn:hover {
+    background-color: #FF6B6B;
 }
 
 @media (max-width: 768px) {

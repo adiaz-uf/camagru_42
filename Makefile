@@ -34,7 +34,7 @@ init: build up  ## Initialize the project
 fclean:  ## Completely clean the project (remove containers and volumes)
 	$(DOCKER_COMPOSE) down -v
 	@docker rmi $$(docker images -qa)
-	@rm backend/uploads/*
+	@sudo rm backend/uploads
 
 re:  ## Rebuild and restart the project from scratch
 	$(MAKE) down

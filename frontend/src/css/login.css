@@ -11,7 +11,7 @@ form {
     max-width: 400px;
     color: #E0E1DD;
     box-sizing: border-box;
-    margin-top: 3rem;
+    margin-top: 2rem;
 }
 .login-card h2 {
     text-align: center;
@@ -73,4 +73,21 @@ form {
 }
 .reset-pass-btn:hover {
     background-color: #FF6B6B;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 1rem; /* Reduce padding on small screens */
+        margin: 1rem;
+    }
+
+    .login-card input,
+    .login-card button {
+        font-size: 1rem;
+    }
+
+    .login-card h2 {
+        font-size: 1.5rem;
+    }
 }

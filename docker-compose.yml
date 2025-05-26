@@ -6,7 +6,7 @@ services:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./frontend/src:/usr/share/nginx/html
       - ./backend/uploads:/var/www/html/uploads
-      #- ./frontend/public:/usr/share/nginx/html/images
+      - ./frontend/public:/usr/share/nginx/html/images
       - ./certs:/etc/ssl/certs
     ports:
       - "80:80"
