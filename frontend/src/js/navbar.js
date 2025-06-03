@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const menuToggle = container.querySelector('.menu-toggle');
         const navLinks = container.querySelector('.nav-links');
+        const currentPath = window.location.pathname;
         
         menuToggle.addEventListener('click', function() {
             navLinks.classList.toggle('active');
@@ -34,6 +35,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         navLinks.querySelectorAll('a').forEach(link => {
+            if (link.getAttribute('href') === currentPath) {
+                link.classList.add('active-link');
+            }
+
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
                 menuToggle.setAttribute('aria-expanded', 'false');

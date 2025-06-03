@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     }
 } else {
-    // If the method is not POST, return a 405 Method Not Allowed response
+    
     http_response_code(405);
     echo json_encode(['success' => false, 'message' => 'Method Not Allowed']);
     exit();

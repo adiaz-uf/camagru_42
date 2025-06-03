@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function() {
             body: new URLSearchParams(data)
         })
         .then(response => {
-            // Verificar si la respuesta es válida JSON
             return response.json().catch(() => {
                 alert('Something went wrong. Please try again later.');
                 throw new Error('Invalid JSON response');

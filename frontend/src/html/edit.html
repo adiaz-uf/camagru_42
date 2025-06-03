@@ -30,19 +30,23 @@
             <div class="img-container">
                 <div class="main-img">
                     <div class="select-img">
-                        <button class="btn" type="submit" style="width: fit-content;">Open WebCam</button>
+                        <button for="webcamInput" class="upload-webcam disabled" type="submit">Open WebCam</button>
+                        <button id="takePhotoBtn" class="btn" style="display: none;">Take Photo</button>
                         or upload an image to edit
                         <div class="form-container">
                             <form id="uploadForm" enctype="multipart/form-data">
-                                <label for="imageInput" class="upload-label">Select from device</label>
-                                <input class="upload-input" type="file"disabled name="image" id="imageInput" accept="image/*" required>
-                                <!-- <input class="caption-input" type="text" name="caption" id="captionInput" placeholder="Write a caption..."> -->
+                                <label for="imageInput" class="upload-label disabled">Select from device</label>
+                                <input class="upload-input" type="file" disabled name="image" id="imageInput" accept="image/*" required>
                                 <button class="upload-btn" type="submit">Save Image</button>
                             </form>
                         </div>
                     </div>
                     <div class="uploaded-image" id="imageEditorArea">
                         <img id="mainImage" src="" alt="Selected image" style="max-width: 100%; display: none;">
+                        <div id="webcamContainer" style="display: none; flex-direction: column; align-items: center; gap: 0.5rem;">
+                            <video id="webcamPreview" autoplay playsinline style="max-width: 100%; border-radius: 8px;"></video>
+                        </div>
+                        <canvas id="webcamCanvas" style="display: none;"></canvas>
                         <img id="overlayImage" src="" alt="Overlay image" style="display: none;">
                         <div id="responseMessage"></div>
                     </div>
@@ -85,7 +89,6 @@
         protectRoute();
     </script>
     <script src="../js/edit.js"></script>
-    <script src="../js/main.js"></script>
     <script src="../js/navbar.js"></script>
     <script src="../js/upload.js"></script>
     <script src="../js/post-image.js"></script>

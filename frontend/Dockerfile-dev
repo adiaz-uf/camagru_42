@@ -1,23 +1,16 @@
-# Usa una imagen base de Node.js para el entorno de desarrollo
+
 FROM node:alpine
 
-# Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia el package.json y package-lock.json (si existe) al contenedor
 COPY ./package*.json ./
 
-# Instala las dependencias necesarias para el frontend
 RUN npm install
 
-# Instala live-server globalmente para permitir el hot reload
 RUN npm install -g live-server
 
-# Copia el código del frontend al contenedor
 COPY ./src ./src
 
-# Expone el puerto 8080 para acceder al sitio
 EXPOSE 3000
 
-# Ejecuta live-server en el directorio de src para hot-reload
 CMD ["live-server", "src", "--port=3000", "--host=0.0.0.0", "--no-browser"]

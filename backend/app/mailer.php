@@ -1,27 +1,26 @@
 <?php
-
 require __DIR__ . '/../vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 function sendConfirmationEmail($toEmail, $confirmUrl, $tousername) {
-   $mail = new PHPMailer(true); // Instancia de PHPMailer
+   $mail = new PHPMailer(true);
 
     try {
-        // Configuración del servidor SMTP
+        // SMTP server conf
         $mail->isSMTP();                                
-        $mail->Host = 'sandbox.smtp.mailtrap.io';                  
-        $mail->SMTPAuth = true;                                // Activar la autenticación SMTP
-        $mail->Username = '4ecdf08ed42372';                   // Nombre de usuario
-        $mail->Password = '13ef556f4619f7';                      // Contraseña del usuario
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;    // Seguridad
-        $mail->Port = 587;                                    // Puerto SMTP
+        $mail->Host = getenv('MAIL_HOST');
+        $mail->Port = getenv('MAIL_PORT');
+        $mail->Username = getenv('MAIL_USERNAME');
+        $mail->Password = getenv('MAIL_PASSWORD');         
+        $mail->SMTPAuth = true;                               
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; 
 
-        // Remitente y receptor
-        $mail->setFrom('no-reply@camagru.com', 'Camagru');
+        
+        $mail->setFrom(getenv('MAIL_FROM_ADDRESS'), getenv('MAIL_FROM_NAME'));
         $mail->addAddress($toEmail, $tousername);
 
-        // Contenido del correo
+        // mail content
         $mail->isHTML(true);                                 
         $mail->Subject = 'Validate email';
         $mail->Body = "

@@ -1,28 +1,21 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Selecciona el formulario de inicio de sesión
     const loginForm = document.querySelector('form');
     
-    // Maneja el evento de envío del formulario
     loginForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Evita que se envíe el formulario automáticamente
-        
-        // Obtiene los valores de los campos del formulario
+        event.preventDefault(); 
+    
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
         
-        // Validación básica del formulario
         if (username === "" || password === "") {
             alert("Please fill in both fields.");
-            return;  // Si los campos están vacíos, no enviamos la solicitud
+            return; 
         }
-        
-        // Crear objeto con los datos a enviar
+
         const data = {
             username: username,
             password: password
         };
-        
-        // Realizar la solicitud AJAX para enviar los datos de inicio de sesión
         fetch(`${window.location.origin}/backend/app/login.php`, {
             method: 'POST',
             headers: {
@@ -39,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             if (data.success) {
                 loginForm.reset();
-                window.location.href = '/html/home.html';
+                window.location.href = '/html/galery.html';
             } else {
                 alert(data.message);
             }

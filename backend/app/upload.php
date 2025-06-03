@@ -81,12 +81,6 @@ try {
 
     $imageUrl = "/uploads/" . $newFileName;
 
-/*     $stmt = $pdo->prepare("INSERT INTO image (user_id, image_url) VALUES (:user_id, :image_url)");
-    $stmt->execute([
-        ':user_id' => $userId,
-        ':image_url' => $imageUrl,
-    ]); */
-
     echo json_encode(['success' => true, 'message' => 'Image uploaded successfully.', 'image_url' => $imageUrl]);
 } catch (Exception $e) {
     http_response_code(500);

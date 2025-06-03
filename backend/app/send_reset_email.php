@@ -20,9 +20,8 @@ if (!$user) {
 }
 
 $token = bin2hex(random_bytes(32));
-#$resetUrl = "{$protocol}{$host}/frontend/html/new_password.html?token=$token";
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-$host = $_SERVER['HTTP_HOST']; // IP o dominio dinámico
+$host = $_SERVER['HTTP_HOST'];
 
 $resetUrl = "https://{$host}/html/new-password.html?token=$token";
 
@@ -35,14 +34,14 @@ $stmt->execute();
 $mail = new PHPMailer(true);
 try {
     $mail->isSMTP();
-    $mail->Host = 'sandbox.smtp.mailtrap.io';
+    $mail->Host = getenv('MAIL_HOST')
+    $mail->Port = getenv('MAIL_PORT')
+    $mail->Username = getenv('MAIL_USERNAME')        
+    $mail->Password = getenv('MAIL_PASSWORD')  
     $mail->SMTPAuth = true;
-    $mail->Username = '4ecdf08ed42372';
-    $mail->Password = '13ef556f4619f7';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
 
-    $mail->setFrom('no-reply@camagru.com', 'Camagru');
+    $mail->setFrom(getenv('MAIL_FROM_ADDRESS'), getenv('MAIL_FROM_NAME'));
     $mail->addAddress($email, $user['username']);
 
     $mail->isHTML(true);

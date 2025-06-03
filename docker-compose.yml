@@ -31,12 +31,12 @@ services:
   frontend:
     build: 
       context: ./frontend
-      dockerfile: Dockerfile-dev  # Aquí indicamos el Dockerfile de desarrollo
+      dockerfile: Dockerfile-dev 
     volumes:
-      - ./frontend/src:/app/src  # Montamos el directorio src local para que los cambios se reflejen en tiempo real
+      - ./frontend/src:/app/src
       - ./frontend/public:/app/public
     environment:
-      - NODE_ENV=development  # Establecemos el entorno de desarrollo
+      - NODE_ENV=development
     expose:
       - "80"
 
@@ -51,7 +51,7 @@ services:
     volumes:
       - camagru_db_data:/var/lib/mysql
       - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
-    command: --skip-ssl  # Desactivar SSL
+    command: --skip-ssl
 
 volumes:
   camagru_db_data:

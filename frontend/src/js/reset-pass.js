@@ -3,7 +3,7 @@ document.getElementById("reset-form").addEventListener("submit", async function 
 
     const email = document.getElementById("email").value.trim();
     const messageBox = document.getElementById("message");
-    messageBox.textContent = ''; // Limpiar mensajes anteriores
+    messageBox.textContent = '';
 
     if (!email) {
         messageBox.textContent = "Please enter your email.";

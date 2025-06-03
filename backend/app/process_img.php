@@ -31,14 +31,12 @@ $posY = isset($_POST['posY']) ? (int) $_POST['posY'] : null;
 $stickerWidth = isset($_POST['stickerWidth']) ? (int) $_POST['stickerWidth'] : null;
 $stickerHeight = isset($_POST['stickerHeight']) ? (int) $_POST['stickerHeight'] : null;
 
-// Validar coordenadas y sticker
 if ($posX === null || $posY === null || $stickerName === '') {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'Sticker or coordinates missing.']);
     exit();
 }
 
-// Configuraciones
 $maxFileSize = 5 * 1024 * 1024;
 $allowedExtensions = ['jpg', 'jpeg', 'png'];
 $allowedMimeTypes = ['image/jpeg', 'image/png'];
@@ -51,7 +49,6 @@ if (!is_dir($uploadDir) && !mkdir($uploadDir, 0755, true)) {
     exit();
 }
 
-// Validar archivo subido
 if (!isset($_FILES['image'])) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'No file uploaded.']);
@@ -83,9 +80,7 @@ if (!in_array($ext, $allowedExtensions) || !in_array($mimeType, $allowedMimeType
     exit();
 }
 
-// Validar sticker
-$stickerName = basename($stickerName); // Protección contra path traversal
-/* $stickerPath = $stickerDir . $stickerName; */
+$stickerName = basename($stickerName);
 $stickerPath = '/stickers/' . basename($stickerName);
 
 if (!file_exists($stickerPath)) {
@@ -122,7 +117,6 @@ switch ($mimeType) {
         exit();
 }
 
-// Crear imagen base desde string
 $baseImage = @imagecreatefromstring($imgContent);
 if (!$baseImage) {
     http_response_code(415);
@@ -130,7 +124,6 @@ if (!$baseImage) {
     exit();
 }
 
-// Crear imagen del sticker según extensión
 $stickerExt = strtolower(pathinfo($stickerPath, PATHINFO_EXTENSION));
 switch ($stickerExt) {
     case 'png':
@@ -170,12 +163,10 @@ if ($stickerWidth && $stickerHeight) {
     $sticker = $resizedSticker;
 }
 
-// Fusión de imágenes
 imagealphablending($baseImage, true);
 imagesavealpha($baseImage, true);
 imagecopy($baseImage, $sticker, $posX, $posY, 0, 0, imagesx($sticker), imagesy($sticker));
 
-// Guardar imagen fusionada
 try {
     $newFileName = bin2hex(random_bytes(8)) . ".png";
     $targetPath = $uploadDir . $newFileName;
@@ -186,11 +177,9 @@ try {
 
     $imageUrl = "/uploads/" . $newFileName;
 
-    // Limpiar recursos
     imagedestroy($baseImage);
     imagedestroy($sticker);
 
-    // Insertar en base de datos (sin caption)
     $stmt = $pdo->prepare("INSERT INTO image (user_id, image_url) VALUES (:user_id, :image_url)");
     $stmt->execute([
         ':user_id' => $userId,

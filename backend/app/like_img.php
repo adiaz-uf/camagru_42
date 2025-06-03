@@ -16,7 +16,7 @@ try {
     $stmt = $pdo->prepare("SELECT * FROM `like` WHERE user_id = ? AND image_id = ?");
     $stmt->execute([$user_id, $image_id]);
     if ($stmt->fetch()) {
-        // Unlike
+        // dislike
         $del = $pdo->prepare("DELETE FROM `like` WHERE user_id = ? AND image_id = ?");
         $del->execute([$user_id, $image_id]);
         echo json_encode(['success' => true, 'liked' => false]);

@@ -6,7 +6,4 @@ if (!isset($_SESSION['user_id'])) {
 }
 $username = $_SESSION['username'];
 $email = $_SESSION['email'];
-<pre>
-<?php print_r($_SESSION); ?>
-</pre>
 ?>

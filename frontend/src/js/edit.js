@@ -1,4 +1,5 @@
 const imageInput = document.getElementById('imageInput');
+const webcamInput = document.getElementById('webcamInput');
 const mainImage = document.getElementById('mainImage');
 const overlayImage = document.getElementById('overlayImage');
 
@@ -8,8 +9,10 @@ document.querySelectorAll('.side-container img').forEach(img => {
             overlayImage.src = img.src;
             overlayImage.style.display = 'block';
             imageInput.disabled = false;
+            document.querySelector('.upload-label').classList.remove('disabled');
+            document.querySelector('.upload-webcam').classList.remove('disabled');
         } else {
-            alert("Primero selecciona o sube una imagen.");
+            alert("Select an image");
         }
     });
 });
@@ -17,21 +20,17 @@ document.querySelectorAll('.side-container img').forEach(img => {
 let isDragging = false;
 let offsetX, offsetY;
 
-// Elementos
 const overlay = document.getElementById('overlayImage');
 const editorArea = document.getElementById('imageEditorArea');
 
-// Función para obtener las coordenadas de un evento (ya sea mouse o touch)
 function getEventCoords(e) {
     const rect = editorArea.getBoundingClientRect();
     if (e.touches) {
-        // Si es un evento táctil, tomamos el primer toque
         return {
             x: e.touches[0].clientX - rect.left,
             y: e.touches[0].clientY - rect.top
         };
     } else {
-        // Si es un evento de mouse, usamos clientX y clientY
         return {
             x: e.clientX - rect.left,
             y: e.clientY - rect.top
@@ -39,21 +38,20 @@ function getEventCoords(e) {
     }
 }
 
-// Iniciar el drag (para ratón y para tacto)
+// drag
 function startDrag(e) {
     isDragging = true;
     const coords = getEventCoords(e);
-    const overlayRect = overlay.getBoundingClientRect(); // Coordenadas del overlay
+    const overlayRect = overlay.getBoundingClientRect();
     offsetX = coords.x - (overlayRect.left - editorArea.getBoundingClientRect().left);
     offsetY = coords.y - (overlayRect.top - editorArea.getBoundingClientRect().top);
 }
 
-// Detener el drag
 function stopDrag() {
     isDragging = false;
 }
 
-// Mover el sticker mientras se arrastra
+// Move sticker on drag
 function moveDrag(e) {
     if (isDragging) {
         const coords = getEventCoords(e);
@@ -62,7 +60,6 @@ function moveDrag(e) {
 
         const rect = editorArea.getBoundingClientRect();
         
-        // Limitar dentro del contenedor
         x = Math.max(0, Math.min(x, rect.width - overlay.offsetWidth));
         y = Math.max(0, Math.min(y, rect.height - overlay.offsetHeight));
 
@@ -71,32 +68,30 @@ function moveDrag(e) {
     }
 }
 
-// Eventos de ratón
+// Mouse
 overlay.addEventListener('mousedown', startDrag);
 document.addEventListener('mousemove', moveDrag);
 document.addEventListener('mouseup', stopDrag);
 
-// Eventos táctiles
+// Touch (Mobile)
 overlay.addEventListener('touchstart', startDrag);
 document.addEventListener('touchmove', moveDrag);
 document.addEventListener('touchend', stopDrag);
 
 document.addEventListener('DOMContentLoaded', function () {
   const postButton = document.querySelector('.upload-btn');
-  /* const imageInput = document.getElementById('imageInput'); */
-  /* const overlayImage = document.getElementById('overlayImage'); */
   const responseMessage = document.getElementById('responseMessage');
 
   postButton.addEventListener('click', async function (e) {
     e.preventDefault();
 
     if (!imageInput.files.length || !overlayImage.src) {
-      alert('Debes seleccionar una imagen y un sticker.');
+      alert('Select an image and sticker.');
       return;
     }
-    const realImage = document.querySelector('.uploaded-img');
+    const realImage = document.querySelector('.uploaded-img') || mainImage;
     if (!realImage || !realImage.complete || realImage.naturalWidth === 0) {
-        alert("La imagen aún no se ha cargado completamente.");
+        alert("Wait to load image completly");
         return;
     }
 
@@ -118,24 +113,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const formData = new FormData();
     formData.append('image', imageInput.files[0]);
     const relativeStickerPath = new URL(overlayImage.src).pathname;
-    formData.append('sticker', relativeStickerPath); // Ejemplo: /images/monkey.png
+    formData.append('sticker', relativeStickerPath);
     formData.append('stickerWidth', scaledStickerWidth);
     formData.append('stickerHeight', scaledStickerHeight);
     formData.append('posX', adjustedPosX);
     formData.append('posY', adjustedPosY);
 
-    console.log('Imagen que se envía:', imageInput.files[0]);
-    console.log({
-    scaleX,
-    scaleY,
-    adjustedPosX,
-    adjustedPosY,
-    overlayWidth: overlayImage.offsetWidth,
-    overlayHeight: overlayImage.offsetHeight,
-    scaledStickerWidth,
-    scaledStickerHeight,
-    stickerSrc: overlayImage.src
-    });
     try {
       const res = await fetch(`${window.location.origin}/backend/app/process_img.php`, {
         method: 'POST',
@@ -146,6 +129,9 @@ document.addEventListener('DOMContentLoaded', function () {
       const data = await res.json();
 
       if (data.success) {
+        mainImage.style.display = 'none';
+        overlayImage.style.display = 'none';
+        responseMessage.innerHTML = '';
         responseMessage.innerHTML = `<img src="${data.image_url}" alt="Final Image" class="uploaded-img" />`;
         const container = document.querySelector('.thumbnail-container');
         const noImagesMsg = container.querySelector('.no-images-msg');
@@ -192,10 +178,70 @@ document.addEventListener('DOMContentLoaded', async function () {
               img.classList.add('thumbnail-img');
               container.appendChild(img);
           });
-        } else {
-            console.log('Error loading images:', data.message ||  'No images yet.');
         }
     } catch (err) {
-        /* console.error('Error fetching images:', err); */
+        console.error('Error fetching images:', err);
     }
+});
+
+const webcamBtn = document.querySelector('.upload-webcam');
+const webcamPreview = document.getElementById('webcamPreview');
+const webcamCanvas = document.getElementById('webcamCanvas');
+const webcamContainer = document.getElementById('webcamContainer');
+const takePhotoBtn = document.getElementById('takePhotoBtn');
+
+let mediaStream = null;
+
+webcamBtn.addEventListener('click', async (e) => {
+  e.preventDefault();
+
+  try {
+    mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
+    webcamPreview.srcObject = mediaStream;
+    webcamContainer.style.display = 'flex';
+    takePhotoBtn.style.display = 'flex';
+    mainImage.style.display = 'none';
+  } catch (err) {
+    alert('Could not access webcam');
+    console.error(err);
+  }
+});
+
+takePhotoBtn.addEventListener('click', () => {
+  if (!mediaStream) return;
+
+  const context = webcamCanvas.getContext('2d');
+
+  const aspectRatio = webcamPreview.videoWidth / webcamPreview.videoHeight;
+  const containerWidth = webcamPreview.getBoundingClientRect().width;
+  const containerHeight = containerWidth / aspectRatio;
+
+    webcamCanvas.width = webcamPreview.videoWidth;
+    webcamCanvas.height = webcamPreview.videoHeight;
+  context.drawImage(webcamPreview, 0, 0, webcamCanvas.width, webcamCanvas.height);
+
+  mediaStream.getTracks().forEach(track => track.stop());
+  mediaStream = null;
+
+  webcamContainer.style.display = 'none';
+
+  webcamCanvas.toBlob(blob => {
+    const file = new File([blob], 'webcam.jpg', { type: 'image/jpeg' });
+
+    const imageUrl = URL.createObjectURL(file);
+    mainImage.src = imageUrl;
+    mainImage.style.display = 'block';
+
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(file);
+    imageInput.files = dataTransfer.files;
+
+    mainImage.onload = () => {
+        mainImage.style.display = 'block';
+
+        imageInput.disabled = false;
+        document.querySelector('.upload-label').classList.remove('disabled');
+        document.querySelector('.upload-webcam').classList.remove('disabled');
+    };
+  }, 'image/jpeg', 1.0);
 });

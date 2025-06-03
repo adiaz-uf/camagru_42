@@ -58,13 +58,18 @@ h2 {
     align-items: center;
 }
 nav a {
-    margin-left: 1.5rem;
     text-decoration: none;
     color: #E0E1DD;
     font-weight: 600;
+    margin: 0 1rem;
 }
 nav a:hover {
     color: #FF6B6B;
+}
+.nav-links a.active-link {
+    color: #FF6B6B;
+    font-weight: bold;
+    border-bottom: 2px solid #FF6B6B;
 }
 .menu-toggle {
     display: none;
@@ -93,7 +98,9 @@ nav a:hover {
     text-decoration: none;
     color: #E0E1DD;
     font-weight: 600;
-    margin-bottom: 9rem;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 12rem;
 }
 .btn:hover {
     background-color: #FF6B6B;
@@ -148,6 +155,9 @@ footer {
     }
     .nav-links.active {
         display: flex;
+    }
+    nav a {
+        margin: 0 0.6rem;
     }
 }
 

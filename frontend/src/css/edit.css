@@ -96,17 +96,31 @@
     transition: background-color 0.3s;
     font-weight: bold;
     font-size: 1rem;
-    margin-left: 0.5rem;
 }
 .upload-btn:hover {
     background-color: #FF6B6B;
-    color: #FFFFFF;
 }
-.caption-input {
-    padding: 0.5rem;
+.upload-webcam {
+    background-color: #415A77;
+    border: none;
+    padding: 0.5rem 1rem;
     border-radius: 8px;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: bold;
     font-size: 1rem;
 }
+.upload-webcam:hover {
+    background-color: #FF6B6B;
+}
+.upload-webcam.disabled {
+    background-color: #415A77;
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 .upload-input {
     display: none;
 }
@@ -121,10 +135,17 @@
     font-weight: bold;
     text-align: center;
     box-sizing: border-box;
+    margin-right: 0.5rem;
 }
 .upload-label:hover {
     background-color: #FF6B6B;
     color: #FFFFFF;
+}
+.upload-label.disabled {
+    background-color: #415A77;
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
 }
 .panel-title {
     text-align: center;
@@ -148,16 +169,19 @@
     overflow: hidden;
     transition: background-color 0.3s;
     margin-top: 1rem;
-    border-radius: 8px;
     box-sizing: border-box;
 }
-.uploaded-img {
-    max-height: 100%;
-    max-width: 100%;
-    width: auto;
-    object-fit: contain;
-    display: block;
+.uploaded-img,
+#mainImage {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  justify-self: center;
 }
+
 #imageEditorArea {
     position: relative;
     display: inline-block;
@@ -193,15 +217,15 @@
     text-align: center;
     max-width: 90%;
     max-width: 400px;
-    max-height: 600px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     margin: 2rem;
+    object-fit: contain;
 }
 
 #popupImage {
     max-width: 100%;
     object-fit: contain;
-    height: auto;
+    max-height: 450px;
     margin-bottom: 1rem;
     border-radius: 8px;
 }
@@ -244,6 +268,25 @@
     text-decoration: underline;
 }
 
+#webcamContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 100%;
+  max-height: 500px;
+  overflow: hidden;
+  position: relative;
+}
+#webcamPreview {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+
 @media (max-width: 768px) {
     .edit-container {
         grid-template-columns: 100%;
@@ -284,5 +327,11 @@
     .thumbnail-container img {
         height: auto;
         flex-shrink: 0;
+    }
+    .upload-btn {
+        margin-top: 0.5rem;
+    }
+    #webcamContainer {
+        max-height: 60vh;
     }
 }

@@ -52,7 +52,7 @@ form {
     display: flex;
     justify-content: space-between;
     margin: 1em 0;
-    align-items: center; /* <-- clave */
+    align-items: center;
     gap: 1rem;
 }
 .reset-pass-btn {
@@ -75,10 +75,9 @@ form {
     background-color: #FF6B6B;
 }
 
-/* Mobile-specific adjustments */
 @media (max-width: 480px) {
     .login-card {
-        padding: 1rem; /* Reduce padding on small screens */
+        padding: 1rem;
         margin: 1rem;
     }
 

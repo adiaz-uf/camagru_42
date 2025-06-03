@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    // Validación básica
     if (!imageInput.files.length) {
       responseMessage.textContent = 'Please select an image.';
       return;
@@ -24,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     try {
       const res = await fetch(`${window.location.origin}/backend/app/upload.php`, {
         method: 'POST',
-        credentials: 'include', // importante si usas sesiones PHP
+        credentials: 'include',
         body: formData,
       });
 
@@ -45,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
         img.alt = 'Uploaded image';
         img.classList.add('uploaded-img');
 
-        responseMessage.innerHTML = ''; // Limpia antes de insertar
+        responseMessage.innerHTML = '';
         responseMessage.appendChild(img);
       } else {
         responseMessage.style.color = 'red';

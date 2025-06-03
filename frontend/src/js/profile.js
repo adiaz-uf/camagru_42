@@ -115,37 +115,3 @@ document.getElementById('change-password').addEventListener('submit', function(e
         alert('Error updating password');
     });
 });
-
-// Enable-Disable switch
-
-/* document.addEventListener('DOMContentLoaded', () => {
-  const options = document.querySelectorAll('.toggle-switch .option');
-
-  options.forEach(option => {
-    option.addEventListener('click', async () => { 
-      options.forEach(o => o.classList.remove('active'));
-
-      option.classList.add('active');
-
-      const value = option.dataset.value;
-
-      try {
-        const response = await fetch(`${window.location.origin}/backend/app/update_notifications.php`, {
-          method: 'POST',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ notifications: value === "1" ? 1 : 0 })
-        });
-
-        const data = await response.json();
-        if (!data.success) {
-          alert('Error actualizando la configuración');
-        }
-      } catch (error) {
-        alert('Error al conectar con el servidor');
-      }
-    });
-  });
-}); */

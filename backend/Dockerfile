@@ -40,14 +40,14 @@ RUN composer install --no-dev --optimize-autoloader
 # Copiar todo el código del backend después de instalar las dependencias
 COPY ./ /var/www/html/
 
-RUN chown -R www-data:www-data /var/www/html/uploads && \
-    chmod -R 755 /var/www/html/uploads
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 
 # Exponer el puerto de PHP-FPM
 EXPOSE 9000
 
 # Iniciar PHP-FPM
-CMD ["php-fpm"]
+CMD ["/start.sh"]
 
 
 
