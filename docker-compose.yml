@@ -31,12 +31,12 @@ services:
   frontend:
     build: 
       context: ./frontend
-      dockerfile: Dockerfile-dev 
-    volumes:
-      - ./frontend/src:/app/src
-      - ./frontend/public:/app/public
-    environment:
-      - NODE_ENV=development
+  #    dockerfile: Dockerfile-dev 
+  #  volumes:
+  #    - ./frontend/src:/app/src
+  #    - ./frontend/public:/app/public
+  #  environment:
+  #    - NODE_ENV=development
     expose:
       - "80"
 
