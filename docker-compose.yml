@@ -9,8 +9,8 @@ services:
       - ./frontend/public:/usr/share/nginx/html/images
       - ./certs:/etc/ssl/certs
     ports:
-      - "80:80"
-      - "443:443" 
+      - "8080:8080"
+      - "8443:8443"
     depends_on:
       - backend
       - frontend
@@ -38,7 +38,7 @@ services:
     environment:
       - NODE_ENV=development
     expose:
-      - "80"
+      - "8080"
 
   db:
     image: mysql:5.7

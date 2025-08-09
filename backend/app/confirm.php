@@ -22,7 +22,7 @@ try {
         $stmt->bindParam(':id', $user['id']);
         $stmt->execute();
 
-        echo "Account confirmed successfully. You can now <a href='/login.html'>login</a>.";
+        echo "Account confirmed successfully. You can now <a href='/html/login.html'>login</a>.";
     } else {
         echo "Invalid or already used confirmation link.";
     }

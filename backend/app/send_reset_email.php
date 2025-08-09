@@ -34,10 +34,10 @@ $stmt->execute();
 $mail = new PHPMailer(true);
 try {
     $mail->isSMTP();
-    $mail->Host = getenv('MAIL_HOST')
-    $mail->Port = getenv('MAIL_PORT')
-    $mail->Username = getenv('MAIL_USERNAME')        
-    $mail->Password = getenv('MAIL_PASSWORD')  
+    $mail->Host = getenv('MAIL_HOST');
+    $mail->Port = getenv('MAIL_PORT');
+    $mail->Username = getenv('MAIL_USERNAME');        
+    $mail->Password = getenv('MAIL_PASSWORD');  
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 
