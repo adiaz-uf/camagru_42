@@ -19,14 +19,11 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 
-// Handle POST request
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Retrieve and sanitize form data
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    // Validate required fields
     if (empty($username) || empty($email) || empty($password)) {
         echo json_encode(['success' => false, 'message' => 'All fields are required.']);
         exit();
